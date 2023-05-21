@@ -1,4 +1,4 @@
-function Tabela() {
+function Tabela({ listProducts }) {
     return (
         <table className="table">
             <thead>
@@ -10,12 +10,17 @@ function Tabela() {
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
+                {
+                    listProducts.map((obj, indexp) => (
+                        <tr key={indexp}>
+                            <td>{indexp + 1}</td>
+                            <td>{obj.name}</td>
+                            <td>{obj.brand}</td>
+                            <td><button className="btn btn-success">Selecionar</button></td>
+                        </tr>
+                    ))
+
+                }
             </tbody>
         </table>
     )
