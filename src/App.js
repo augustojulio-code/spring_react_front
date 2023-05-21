@@ -48,13 +48,19 @@ function App() {
         else {
           setProducts([...products, data]);
           alert('Produto Cadastrado');
+          clearForm();
         }
       })
   }
 
+  // clear form
+  const clearForm = () => {
+    setObjProduct(product);
+  }
+
   return (
     <div>
-      <Formulario botao={btnCadastrar} keyboardEvent={toType} insertd={insertData} />
+      <Formulario botao={btnCadastrar} keyboardEvent={toType} insertd={insertData} obj={objProduct} />
       <Tabela listProducts={products} />
     </div>
   );
