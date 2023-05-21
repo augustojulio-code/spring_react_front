@@ -5,7 +5,7 @@ import Tabela from './Tablep';
 
 function App() {
   return (
-    <div className="App">
+    <div>
       <Formulario />
       <Tabela />
     </div>
