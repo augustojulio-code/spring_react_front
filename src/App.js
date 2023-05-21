@@ -30,10 +30,31 @@ function App() {
     setObjProduct({ ...objProduct, [e.target.name]: e.target.value });
   }
 
+  //insert data 
+  const insertData = () => {
+    fetch("http://localhost:8080/products", {
+      method: 'post',
+      body: JSON.stringify(objProduct),
+      headers: {
+        'Content-type': 'application/json',
+        'Accept': 'application/json'
+      }
+    })
+      .then(resp => resp.json())
+      .then(data => {
+        if (data.msg !== undefined) {
+          alert(data.msg);
+        }
+        else {
+          setProducts([...products, data]);
+          alert('Produto Cadastrado');
+        }
+      })
+  }
+
   return (
     <div>
-      <p>{JSON.stringify(objProduct)}</p>
-      <Formulario botao={btnCadastrar} keyboardEvent={toType} />
+      <Formulario botao={btnCadastrar} keyboardEvent={toType} insertd={insertData} />
       <Tabela listProducts={products} />
     </div>
   );
