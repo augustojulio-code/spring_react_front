@@ -1,8 +1,8 @@
-function Formulario({ botao }) {
+function Formulario({ botao, keyboardEvent }) {
     return (
         <form>
-            <input type="text" placeholder="Nome" className="form-control" />
-            <input type="text" placeholder="Marca" className="form-control" />
+            <input type="text" onChange={keyboardEvent} name="name" placeholder="Nome" className="form-control" />
+            <input type="text" onChange={keyboardEvent} name="brand" placeholder="Marca" className="form-control" />
             {
                 botao
                     ?
