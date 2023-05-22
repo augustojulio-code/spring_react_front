@@ -52,6 +52,40 @@ function App() {
         }
       })
   }
+  // update data
+  const updatetData = () => {
+    fetch("http://localhost:8080/products/" + objProduct.id, {
+      method: 'PUT',
+      body: JSON.stringify(objProduct),
+      headers: {
+        'Content-type': 'application/json',
+        'Accept': 'application/json'
+      }
+    })
+      .then(resp => resp.json())
+      .then(data => {
+        if (data.msg !== undefined) {
+          alert(data.msg);
+        }
+        else {
+          alert('Produto Alterado');
+
+          //copy list 
+          let vecTemp = [...products];
+          // get lis index
+          let indexList = vecTemp.findIndex((p) => {
+            return p.id == objProduct.id;
+          });
+          //update obj from temporary list
+          vecTemp[indexList] = objProduct;
+
+          //update list 
+          setProducts(vecTemp);
+
+          clearForm();
+        }
+      })
+  }
 
   //delete data 
   const deleteData = () => {
@@ -102,7 +136,7 @@ function App() {
 
   return (
     <div>
-      <Formulario botao={btnCadastrar} keyboardEvent={toType} insertd={insertData} obj={objProduct} cancel={clearForm} removeObj={deleteData} testeconsole={testes} />
+      <Formulario botao={btnCadastrar} keyboardEvent={toType} insertd={insertData} obj={objProduct} cancel={clearForm} removeObj={deleteData} update={updatetData} />
       <Tabela listProducts={products} select={getProduct} />
     </div>
   );
