@@ -1,4 +1,4 @@
-function Tabela({ listProducts }) {
+function Tabela({ listProducts, select }) {
     return (
         <table className="table">
             <thead>
@@ -16,7 +16,7 @@ function Tabela({ listProducts }) {
                             <td>{indexp + 1}</td>
                             <td>{obj.name}</td>
                             <td>{obj.brand}</td>
-                            <td><button className="btn btn-success">Selecionar</button></td>
+                            <td><button onClick={() => { select(indexp) }} className="btn btn-success">Selecionar</button></td>
                         </tr>
                     ))
 

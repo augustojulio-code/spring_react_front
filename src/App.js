@@ -58,10 +58,16 @@ function App() {
     setObjProduct(product);
   }
 
+  //select product
+  const getProduct = (indexp) => {
+    setObjProduct(products[indexp]);
+    setBtnCadastrar(false);
+  }
+
   return (
     <div>
       <Formulario botao={btnCadastrar} keyboardEvent={toType} insertd={insertData} obj={objProduct} />
-      <Tabela listProducts={products} />
+      <Tabela listProducts={products} select={getProduct} />
     </div>
   );
 }
