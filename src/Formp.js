@@ -1,4 +1,4 @@
-function Formulario({ botao, keyboardEvent, insertd, obj }) {
+function Formulario({ botao, keyboardEvent, insertd, obj, cancel, removeObj, testeconsole }) {
     return (
         <form>
             <input type="text" value={obj.name} onChange={keyboardEvent} name="name" placeholder="Nome" className="form-control" />
@@ -9,9 +9,9 @@ function Formulario({ botao, keyboardEvent, insertd, obj }) {
                     <input type="button" value="Cadastrar" onClick={insertd} className="btn btn-primary" />
                     :
                     <div>
-                        <input type="button" value="Alterar" className="btn btn-warning" />
-                        <input type="button" value="Remover" className="btn btn-danger" />
-                        <input type="button" value="Cancelar" className="btn btn-secondary" />
+                        <input type="button" value="Alterar" onClick={testeconsole} className="btn btn-warning" />
+                        <input type="button" value="Remover" onClick={removeObj} className="btn btn-danger" />
+                        <input type="button" value="Cancelar" onClick={cancel} className="btn btn-secondary" />
                     </div>
             }
 

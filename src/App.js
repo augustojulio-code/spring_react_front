@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react';
 function App() {
 
   const product = {
-    cod: 0,
+    id: 0,
     name: '',
     brand: ''
   }
@@ -18,7 +18,7 @@ function App() {
   const [objProduct, setObjProduct] = useState(product);
 
 
-  //Useeffect request fo api
+  //Useeffect request fo api list
   useEffect(() => {
     fetch("http://localhost:8080/products")
       .then(resp => resp.json())
@@ -53,20 +53,56 @@ function App() {
       })
   }
 
+  //delete data 
+  const deleteData = () => {
+    fetch('http://localhost:8080/products/' + objProduct.id, {
+      method: 'delete',
+      headers: {
+        'Content-type': 'application/json',
+        'Accept': 'application/json'
+      }
+    })
+      .then(resp => resp.json())
+      .then(data => {
+        alert(data.msg)
+        //copy list 
+        let vecTemp = [...products];
+        // get lis index
+        let indexList = vecTemp.findIndex((p) => {
+          return p.id == objProduct.id;
+        });
+        //remove obj from temporary list
+        vecTemp.splice(indexList, 1);
+
+        //update list 
+        setProducts(vecTemp);
+
+        //clear form
+        clearForm();
+      })
+  }
+
+  const testes = () => {
+
+    //console.log(objProduct)
+  }
+
   // clear form
   const clearForm = () => {
     setObjProduct(product);
+    setBtnCadastrar(true)
   }
 
   //select product
   const getProduct = (indexp) => {
     setObjProduct(products[indexp]);
     setBtnCadastrar(false);
+
   }
 
   return (
     <div>
-      <Formulario botao={btnCadastrar} keyboardEvent={toType} insertd={insertData} obj={objProduct} />
+      <Formulario botao={btnCadastrar} keyboardEvent={toType} insertd={insertData} obj={objProduct} cancel={clearForm} removeObj={deleteData} testeconsole={testes} />
       <Tabela listProducts={products} select={getProduct} />
     </div>
   );
